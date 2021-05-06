@@ -1,0 +1,75 @@
+{
+  "name": "etl_lambda_2",
+  "type": "flogo:app",
+  "version": "0.0.1",
+  "appModel": "1.1.0",
+  "description": "",
+  "imports": [
+    "github.com/project-flogo/aws-contrib/trigger/lambda",
+    "github.com/project-flogo/contrib/activity/actreturn",
+    "github.com/project-flogo/contrib/function/string",
+    "github.com/project-flogo/flow"
+  ],
+  "triggers": [
+    {
+      "id": "aws_lambda_trigger",
+      "ref": "#lambda",
+      "name": "AWS Lambda Trigger",
+      "description": "AWS Lambda Trigger",
+      "handlers": [
+        {
+          "action": {
+            "ref": "#flow",
+            "settings": {
+              "flowURI": "res://flow:hallo_action"
+            },
+            "input": {
+              "name": "=$.event.rawQueryString"
+            },
+            "output": {
+              "data": "=$.greetings",
+              "status": 200
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "id": "flow:hallo_action",
+      "data": {
+        "name": "hallo_action",
+        "metadata": {
+          "input": [
+            {
+              "name": "name",
+              "type": "string"
+            }
+          ],
+          "output": [
+            {
+              "name": "greetings",
+              "type": "string"
+            }
+          ]
+        },
+        "tasks": [
+          {
+            "id": "actreturn_2",
+            "name": "Return",
+            "description": "Return Activity",
+            "activity": {
+              "ref": "#actreturn",
+              "settings": {
+                "mappings": {
+                  "greetings": "=string.concat(\"Hallo\",$flow.name)"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
