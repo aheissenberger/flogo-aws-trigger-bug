@@ -42,6 +42,8 @@ Failed to compress file: open /workspaces/flogo-aws-trigger-bug/src/app/src/hand
 
 change the shim [build](./aws-contrib-fixed/trigger/lambda/shim/build.go) of the trigger `github.com/project-flogo/aws-contrib/trigger/lambda` to run `go get` in same folder to update `go.mod` bevore `go build`
 
+**simulate fix with local changed module**
+
 ```sh
 rm -fr src-fix/app
 flogo create -f flogo.json src-fix/app
