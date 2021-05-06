@@ -10,6 +10,10 @@ exit status 1
 
 **Produce the ERROR use case:**
 
+alle resource to reproduce this error including setup can be found in this repository
+https://github.com/aheissenberger/flogo-aws-trigger-bug
+
+
 ```sh
 
 rm -fr src/app
